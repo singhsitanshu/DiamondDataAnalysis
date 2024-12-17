@@ -10,3 +10,12 @@ df = pd.read_csv(r'C:\Users\singh\.cache\kagglehub\datasets\shivam2503\diamonds\
 df.head()
 
 df.describe()
+
+df.drop(columns='Unnamed: 0', axis=1, inplace=True)
+df.head()
+
+df.shape
+
+df['cut'].unique()
+df['color'].unique()
+df['clarity'].unique()
