@@ -55,3 +55,11 @@ for column in columns:
     X_test[column] = encoder.fit_transform(X = X_test[column], y = y_test)
 
 X_train.head()
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+# Train data split
+X_train = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
+# Test data split
+X_test = pd.DataFrame(scaler.fit_transform(X_test), columns=X_test.columns)
