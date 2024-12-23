@@ -36,3 +36,22 @@ if count>0:
     print('Duplicate Data Count:',count)
     df.drop_duplicates(inplace=True)
     print('Dropped!')
+
+df.head()
+
+X = df.drop(columns='price',axis=1)
+y = df['price']
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y ,test_size=0.2, random_state=42)
+
+from category_encoders.target_encoder import TargetEncoder
+
+encoder = TargetEncoder()
+columns = ['cut','color','clarity']
+for column in columns:
+    X_train[column] = encoder.fit_transform(X = X_train[column], y = y_train)
+    X_test[column] = encoder.fit_transform(X = X_test[column], y = y_test)
+
+X_train.head()
