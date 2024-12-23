@@ -30,3 +30,9 @@ df = df[(df['price']>=s_lower) & (df['price']<=s_upper)]
 df.shape()
 
 df.isna().sum()*100/df.shape[0]
+
+count=len(df[df.duplicated()])
+if count>0:
+    print('Duplicate Data Count:',count)
+    df.drop_duplicates(inplace=True)
+    print('Dropped!')
