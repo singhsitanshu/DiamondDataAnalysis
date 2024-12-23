@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plot
-import seaborn
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 #C:\Users\singh\.cache\kagglehub\datasets\shivam2503\diamonds\versions\1\diamonds.csv
 
@@ -63,3 +63,33 @@ scaler = StandardScaler()
 X_train = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
 # Test data split
 X_test = pd.DataFrame(scaler.fit_transform(X_test), columns=X_test.columns)
+
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+
+model.fit(X_train, y_train)
+
+train_pred = model.predict(X_train)
+test_pred = model.predict(X_test)
+
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 4))
+# Plot the first graph
+axes[0].scatter(y_train, train_pred, alpha=0.5)
+axes[0].plot(np.linspace(0, np.max(y_train), 100), np.linspace(0, np.max(y_train), 100), '--', color='red', label='Prediction Line')
+axes[0].set_title('Train Data')
+axes[0].set_xlabel('Actual Values (y_test)')
+axes[0].set_ylabel('Predicted Values')
+axes[0].legend()
+axes[0].grid(True)
+# Plot the second graph
+axes[1].scatter(y_test, test_pred, alpha=0.5)
+axes[1].plot(np.linspace(0, np.max(y_test), 100), np.linspace(0, np.max(y_test), 100), '--', color='red', label='Prediction Line')
+axes[1].set_title('Test Data')
+axes[1].set_xlabel('Actual Values (y_test)')
+axes[1].set_ylabel('Predicted Values')
+axes[1].legend()
+axes[1].grid(True)
+# Adjust layout
+plt.tight_layout()
+plt.show()
