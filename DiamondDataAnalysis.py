@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sklearn
 
 #C:\Users\singh\.cache\kagglehub\datasets\shivam2503\diamonds\versions\1\diamonds.csv
 
@@ -27,7 +28,7 @@ IQR = s_75-s_25
 s_lower = max(s_25 - IQR*1.5, df['price'].min())
 s_upper = min(s_75 + IQR*1.5, df['price'].max())
 df = df[(df['price']>=s_lower) & (df['price']<=s_upper)]
-df.shape()
+df.shape
 
 df.isna().sum()*100/df.shape[0]
 
@@ -93,3 +94,29 @@ axes[1].grid(True)
 # Adjust layout
 plt.tight_layout()
 plt.show()
+
+coefficients = model.coef_
+column_names = X_train.columns
+coefficients_df = pd.DataFrame({'Column Name': column_names, 'Coefficient': coefficients})
+coefficients_df
+
+
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+print("::---------Train Data---------::")
+mae = mean_absolute_error(y_train,train_pred)
+mse = mean_squared_error(y_train,train_pred)
+r2_train = r2_score(y_train,train_pred)
+print('Mean Absolute Error:',mae)
+print('Mean Squared Error:',mse)
+print('R2 Score:',r2_train*100,'%')
+print('*'*50)
+print("::---------Test Data---------::")
+mae = mean_absolute_error(y_test,test_pred)
+mse = mean_absolute_error(y_test,test_pred)
+r2_test = r2_score(y_test,test_pred)
+print('Mean Absolute Error:',mae)
+print('Mean Squared Error:',mse)
+print('R2 Score:',r2_test*100,'%')
+print('*'*50)
